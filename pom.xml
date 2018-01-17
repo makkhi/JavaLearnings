@@ -14,6 +14,7 @@
         <module>REST</module>
         <module>powermock</module>
         <module>spring</module>
+        <module>java</module>
     </modules>
 
     <build>
