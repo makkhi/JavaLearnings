@@ -12,9 +12,7 @@
 
     <modules>
         <module>REST</module>
-        <module>java8</module>
         <module>powermock</module>
-        <module>designpatterns</module>
         <module>spring</module>
     </modules>
 
