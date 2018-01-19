@@ -1,0 +1,19 @@
+Git commands
+
+git checkout -b branchname <commit>
+
+If you have committed at your local then following command will create a branch with your commits at local
+
+git checkout -b <branchname>
+
+Reverting local commits
+git reset --hard origin/<branchname>
+
+Push locally created branch to remote
+git push -u origin <branch-name>
+
+How to delete local and remote branch
+
+- git branch -d feature/login
+
+- git push origin --delete feature/login

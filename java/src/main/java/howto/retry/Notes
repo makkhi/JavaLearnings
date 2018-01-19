@@ -1,0 +1,38 @@
+Few options are
+1) Spring-retry
+2) failsafe - https://github.com/jhalterman/failsafe
+
+
+Blog reference -
+
+https://stackoverflow.com/questions/31651236/how-to-implement-a-retry-mechanism-in-jersey-client-java
+
+public Response execWithBackoff(Callable<Response> i) {
+    ExponentialBackOff backoff = new ExponentialBackOff.Builder().build();
+
+    long delay = 0;
+
+    Response response;
+    do {
+        try {
+            Thread.sleep(delay);
+
+            response = i.call();
+
+            if (response.getStatusInfo().getFamily() == Family.SERVER_ERROR) {
+                log.warn("Server error {} when accessing path {}. Delaying {}ms", response.getStatus(), response.getLocation().toASCIIString(), delay);
+            }
+
+            delay = backoff.nextBackOffMillis();
+        } catch (Exception e) { //callable throws exception
+            throw new RuntimeException("Client request failed", e);
+        }
+
+    } while (delay != ExponentialBackOff.STOP && response.getStatusInfo().getFamily() == Family.SERVER_ERROR);
+
+    if (response.getStatusInfo().getFamily() == Family.SERVER_ERROR) {
+        throw new IllegalStateException("Client request failed for " + response.getLocation().toASCIIString());
+    }
+
+    return response;
+}
