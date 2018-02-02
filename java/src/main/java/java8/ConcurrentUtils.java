@@ -1,6 +1,7 @@
 package java8;
 
-public class LambdaExpressions {
+
+public class ConcurrentUtils {
 
   public static void main(String[] args) {
     //

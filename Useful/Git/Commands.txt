@@ -1,5 +1,27 @@
 Git commands
 
+1. How to create a branch and push to remote
+
+To create a new branch by branching off from existing branch
+git checkout -b <new_branch>
+
+and then push this new branch to repository using
+git push -u origin <new_branch>
+This creates and pushes all local commits to a newly created remote branch origin/<new_branch>
+
+2. How to create patch and apply
+
+If you haven't yet commited the changes, then:
+git diff > mypatch.patch
+But sometimes it happens that part of the stuff you're doing are new files that are untracked and won't be in your git diff output. So, one way to do a patch is to stage everything for a new commit (but don't do the commit), and then:
+git diff --cached > mypatch.patch
+Add the 'binary' option if you want to add binary files to the patch (e.g. mp3 files):
+git diff --cached --binary > mypatch.patch
+You can later apply the patch:
+git apply mypatch.patch
+
+
+3. Other commands
 git checkout -b branchname <commit>
 
 If you have committed at your local then following command will create a branch with your commits at local
@@ -17,3 +39,19 @@ How to delete local and remote branch
 - git branch -d feature/login
 
 - git push origin --delete feature/login
+
+
+4. How to switch branches while leaving your work as it.
+
+git stash save "changes in branch" (on branch_1)
+git checkout branch_2
+do work in branch_2
+
+git checkout branch_1
+
+git stash pop
+
+Reference -
+http://www.codeblocq.com/2016/02/Stash-your-changes-before-switching-branch/
+
+
